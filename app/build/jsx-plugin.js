@@ -2,7 +2,10 @@ const jsx = require('jsx-transform')
 const MagicString = require('magic-string')
 const { createFilter } = require('rollup-pluginutils')
 
-module.exports = (options = {}) => {
+module.exports = (options = {
+  factory: 'React.createElement',
+  passUnknownTagsToFactory: true
+}) => {
   const filter = createFilter(options.include, options.exclude)
   return {
     transform: function sourceToCode (code, id) {

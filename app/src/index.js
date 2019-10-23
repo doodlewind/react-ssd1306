@@ -1,10 +1,23 @@
 import './polyfill.js'
 import React from 'react/cjs/react.development.js'
-import MyRenderer from './renderer.js'
+import { MyRenderer, Rect, Text } from './renderer.js'
 
-const Content = props => {
-  console.log(props.foo)
-  return null
+class Container extends React.Component {
+  componentDidMount () {
+
+  }
+
+  render () {
+    return this.props.children
+  }
 }
 
-MyRenderer.render(<Content foo={123} />)
+const App = (
+  <Container>
+    <Rect />
+    <Rect />
+    <Text>demo</Text>
+  </Container>
+)
+
+MyRenderer.render(App)

@@ -10,8 +10,8 @@ module.exports = {
   },
   external: ['os'],
   plugins: [
+    jsx(),
     nodeResolve(),
-    commonjs({ include: 'node_modules/**', sourceMap: false }),
-    jsx({ factory: 'React.createElement' })
+    commonjs({ include: 'node_modules/**', sourceMap: false })
   ]
 }
