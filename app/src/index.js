@@ -1,6 +1,10 @@
-/* global ReactDOM */
+import './polyfill.js'
+import React from 'react/cjs/react.development.js'
+import MyRenderer from './renderer.js'
 
-ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('root')
-)
+const Content = props => {
+  console.log(props.foo)
+  return null
+}
+
+MyRenderer.render(<Content foo={123} />)
