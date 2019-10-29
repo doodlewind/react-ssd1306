@@ -12,12 +12,20 @@ INCLUDES=-I/usr/local/include/quickjs
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-main: $(OBJDIR) $(OBJDIR)/process.o $(OBJDIR)/main.o
-	$(CC) $(LDFLAGS) $(CFLAGS_OPT) -o $@ $(OBJDIR)/main.o $(OBJDIR)/process.o $(LIBS) -lm -ldl
+main: $(OBJDIR) $(OBJDIR)/process.o $(OBJDIR)/main.o $(OBJDIR)/oled96.o $(OBJDIR)/fonts.o
+	$(CC) $(LDFLAGS) $(CFLAGS_OPT) -o $@ \
+	$(OBJDIR)/process.o $(OBJDIR)/main.o $(OBJDIR)/oled96.o $(OBJDIR)/fonts.o \
+	$(LIBS) -lm -ldl
 	strip main
 
 $(OBJDIR)/process.o: process.c
 	$(CC) $(LDFLAGS) $(CFLAGS_OPT) -c $(INCLUDES) -o $@ process.c
+
+$(OBJDIR)/oled96.o: oled96.c
+	$(CC) $(CFLAGS_OPT) -c -o $@ oled96.c
+
+$(OBJDIR)/fonts.o: fonts.c
+	$(CC) $(CFLAGS_OPT) -c -o $@ fonts.c
 
 $(OBJDIR)/main.o: main.c
 	$(CC) $(LDFLAGS) $(CFLAGS_OPT) -c $(INCLUDES) -o $@ main.c
