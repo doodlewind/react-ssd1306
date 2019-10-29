@@ -1,24 +1,20 @@
-import * as std from 'std'
-import * as os from 'os'
-import { open, close } from 'process'
+import { setTimeout } from 'os'
+import { init, clear, drawText } from 'renderer'
 
-const CHUNK_SIZE = 200000 // 200KB
+const wait = timeout =>
+  new Promise(resolve => setTimeout(resolve, timeout))
 
-const fd = open('curl 2>/dev/null https://jsonplaceholder.typicode.com/users', 'r')
+;(async () => {
+  const invert = false
+  const flip = false
+  init(invert, flip)
+  clear()
+  drawText('Hello world!')
+  await wait(2000)
 
-os.setReadHandler(fd, () => {
-  const readBuf = new Uint8Array(CHUNK_SIZE)
-  const l = os.read(fd, readBuf.buffer, 0, readBuf.length)
+  clear()
+  drawText('Again!')
+  await wait(2000)
 
-  if (!l) {
-    std.out.printf('\n')
-
-    os.setReadHandler(fd, null)
-    close(fd)
-  }
-
-  const string = String.fromCharCode.apply(null, readBuf)
-  std.out.printf('%s', string)
-})
-
-console.log('This line appears first')
+  clear()
+})()

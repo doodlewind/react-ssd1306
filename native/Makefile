@@ -12,14 +12,14 @@ INCLUDES=-I/usr/local/include/quickjs
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-main: $(OBJDIR) $(OBJDIR)/process.o $(OBJDIR)/main.o $(OBJDIR)/oled96.o $(OBJDIR)/fonts.o
+main: $(OBJDIR) $(OBJDIR)/renderer.o $(OBJDIR)/main.o $(OBJDIR)/oled96.o $(OBJDIR)/fonts.o
 	$(CC) $(LDFLAGS) $(CFLAGS_OPT) -o $@ \
-	$(OBJDIR)/process.o $(OBJDIR)/main.o $(OBJDIR)/oled96.o $(OBJDIR)/fonts.o \
+	$(OBJDIR)/renderer.o $(OBJDIR)/main.o $(OBJDIR)/oled96.o $(OBJDIR)/fonts.o \
 	$(LIBS) -lm -ldl
 	strip main
 
-$(OBJDIR)/process.o: process.c
-	$(CC) $(LDFLAGS) $(CFLAGS_OPT) -c $(INCLUDES) -o $@ process.c
+$(OBJDIR)/renderer.o: renderer.c
+	$(CC) $(LDFLAGS) $(CFLAGS_OPT) -c $(INCLUDES) -o $@ renderer.c
 
 $(OBJDIR)/oled96.o: oled96.c
 	$(CC) $(CFLAGS_OPT) -c -o $@ oled96.c
@@ -31,7 +31,7 @@ $(OBJDIR)/main.o: main.c
 	$(CC) $(LDFLAGS) $(CFLAGS_OPT) -c $(INCLUDES) -o $@ main.c
 
 main.c: main.js
-	qjsc -flto -e -M process,process -m -o $@ main.js
+	qjsc -flto -e -M renderer,renderer -m -o $@ main.js
 
 clean:
 	rm ./main
