@@ -25,9 +25,12 @@ JSValue nativeClear(JSContext *ctx, JSValueConst this_val, int argc, JSValueCons
 
 JSValue nativeDrawText(JSContext *ctx, JSValueConst this_val, int argc, JSValueConst *argv)
 {
+    int row, col;
     const char *text = JS_ToCString(ctx, argv[0]);
-    printf("draw text: %s\n", text);
-    oledWriteString(0, 0, (char *)text, FONT_NORMAL);
+    JS_ToInt32(ctx, &row, argv[1]);
+    JS_ToInt32(ctx, &col, argv[2]);
+    printf("drawing text at (%d, %d): %s\n", row, col, text);
+    oledWriteString(col, row, (char *)text, FONT_NORMAL);
     JS_FreeCString(ctx, text);
     return JS_NULL;
 }
@@ -46,7 +49,7 @@ const JSCFunctionListEntry nativeFuncs[] = {
     JS_CFUNC_DEF("init", 2, nativeInit),
     JS_CFUNC_DEF("clear", 0, nativeClear),
     JS_CFUNC_DEF("drawPixel", 2, nativeDrawPixel),
-    JS_CFUNC_DEF("drawText", 1, nativeDrawText)};
+    JS_CFUNC_DEF("drawText", 3, nativeDrawText)};
 
 int moduleInitFunc(JSContext *ctx, JSModuleDef *m)
 {

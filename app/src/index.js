@@ -20,6 +20,9 @@ class App extends Component {
         <Text row={0} col={0}>
           {hello}
         </Text>
+        <Text row={1} col={1}>
+          {hello}
+        </Text>
         <Pixel x={p} y={p} />
       </Fragment>
     )

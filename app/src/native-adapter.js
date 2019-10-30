@@ -34,7 +34,8 @@ class NativeRenderer {
     for (let i = 0; i < this.elements.length; i++) {
       const element = this.elements[i]
       if (element instanceof NativeTextElement) {
-        drawText(element.props.children[0])
+        const { children, row, col } = element.props
+        drawText(children[0], row, col)
       } else if (element instanceof NativePixelElement) {
         drawPixel(element.props.x, element.props.y)
       }
