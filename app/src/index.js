@@ -9,18 +9,18 @@ class App extends Component {
     super()
     this.state = {
       hello: 'Hello React!',
-      pixelX: 0
+      p: 0
     }
   }
 
   render () {
-    const { hello, pixelX } = this.state
+    const { hello, p } = this.state
     return (
       <Fragment>
         <Text row={0} col={0}>
           {hello}
         </Text>
-        <Pixel x={pixelX} y={42} />
+        <Pixel x={p} y={p} />
       </Fragment>
     )
   }
@@ -29,8 +29,8 @@ class App extends Component {
     console.log('APP DID MOUNT!')
 
     // XXX: emulate event driven update
-    setTimeout(() => this.setState({ hello: 'Hello Pi!', pixelX: 42 }), 2000)
-    setTimeout(() => this.setState({ hello: '' }), 4000)
+    setTimeout(() => this.setState({ hello: 'Hello Pi!', p: 42 }), 2000)
+    setTimeout(() => this.setState({ hello: '', p: -1 }), 4000)
   }
 }
 

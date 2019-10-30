@@ -1,4 +1,4 @@
-import { init, clear, drawText } from 'renderer'
+import { init, clear, drawText, drawPixel } from 'renderer'
 
 const FPS = 30
 const mainLoop = async (onTick, delay = 1000 / FPS) => {
@@ -35,6 +35,8 @@ class NativeRenderer {
       const element = this.elements[i]
       if (element instanceof NativeTextElement) {
         drawText(element.props.children[0])
+      } else if (element instanceof NativePixelElement) {
+        drawPixel(element.props.x, element.props.y)
       }
       console.log(JSON.stringify(element.props))
     }

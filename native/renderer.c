@@ -32,9 +32,20 @@ JSValue nativeDrawText(JSContext *ctx, JSValueConst this_val, int argc, JSValueC
     return JS_NULL;
 }
 
+JSValue nativeDrawPixel(JSContext *ctx, JSValueConst this_val, int argc, JSValueConst *argv)
+{
+    int x, y;
+    JS_ToInt32(ctx, &x, argv[0]);
+    JS_ToInt32(ctx, &y, argv[1]);
+    printf("%d, %d", x, y);
+    oledSetPixel(x, y, 1);
+    return JS_NULL;
+}
+
 const JSCFunctionListEntry nativeFuncs[] = {
     JS_CFUNC_DEF("init", 2, nativeInit),
     JS_CFUNC_DEF("clear", 0, nativeClear),
+    JS_CFUNC_DEF("drawPixel", 2, nativeDrawPixel),
     JS_CFUNC_DEF("drawText", 1, nativeDrawText)};
 
 int moduleInitFunc(JSContext *ctx, JSModuleDef *m)
