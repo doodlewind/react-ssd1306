@@ -3,6 +3,7 @@ import {
   createNativeInstance,
   appendNativeElement,
   updateNativeElement,
+  removeNativeElement,
   getHostContextNode
 } from './native-adapter.js'
 
@@ -79,7 +80,7 @@ const hostConfig = {
   },
   removeChildFromContainer (parent, stateNode) {
     log('removeChildFromContainer')
-    // TODO
+    removeNativeElement(parent, stateNode)
   },
 
   useSyncScheduling: true,
@@ -94,7 +95,7 @@ const container = reconciler.createContainer(nativeContainer, false)
 export const Text = 'TEXT'
 export const Pixel = 'PIXEL'
 
-export const MyRenderer = {
+export const SSD1306Renderer = {
   render (reactElement) {
     return reconciler.updateContainer(reactElement, container)
   }
