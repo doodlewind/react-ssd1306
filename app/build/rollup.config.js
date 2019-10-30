@@ -8,7 +8,7 @@ module.exports = {
     file: 'dist/app.js',
     format: 'esm'
   },
-  external: ['os'],
+  external: ['os', 'renderer'],
   plugins: [
     jsx(),
     nodeResolve(),

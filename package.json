@@ -4,7 +4,8 @@
   "description": "A React Renderer for SSD1306 OLED on Raspberry Pi",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cd app && npm run build && cd ../native && make clean && make",
+    "start": "./native/main"
   },
   "keywords": [
     "react",

@@ -1,6 +1,9 @@
+import '../app/dist/app.js'
+
+// Minimal demo using OLED renderer
+/*
 import { setTimeout } from 'os'
 import { init, clear, drawText } from 'renderer'
-
 const wait = timeout =>
   new Promise(resolve => setTimeout(resolve, timeout))
 
@@ -18,3 +21,4 @@ const wait = timeout =>
 
   clear()
 })()
+*/
