@@ -1,8 +1,8 @@
 {
   "name": "react-ssd1306",
   "version": "1.0.0",
-  "description": "A React Renderer for SSD1306 OLED on Raspberry Pi",
-  "main": "index.js",
+  "description": "A React Renderer for SSD1306 OLED chip on Raspberry Pi",
+  "main": "src/renderer.js",
   "scripts": {
     "build": "cd app && npm run build && cd ../native && make clean && make",
     "start": "./native/main"
