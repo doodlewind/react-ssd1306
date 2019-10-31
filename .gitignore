@@ -1,2 +1,3 @@
 node_modules
 app/dist/*.js
+.DS_Store

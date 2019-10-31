@@ -1,7 +1,7 @@
 # React SSD1306
 A React Renderer for SSD1306 OLED chip on Raspberry Pi
 
-![](https://ewind.us/images/react-ssd1306/pi-success.jpg)
+![](./demo.jpg)
 
 ## Introduction
 This project demonstrates how to:
