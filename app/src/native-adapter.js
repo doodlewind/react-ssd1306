@@ -9,7 +9,7 @@ const mainLoop = async (onTick, delay = 1000 / FPS) => {
   while (true) await nativeTick()
 }
 
-class NativeScreen {
+export class NativeContainer {
   constructor () {
     this.elements = []
     this.synced = true
@@ -65,11 +65,7 @@ class NativePixelElement {
 }
 
 export const createNativeInstance = (type, props) => {
-  if (type === 'SCREEN') {
-    const screen = new NativeScreen()
-    // window.screen = screen // browser debug
-    return screen
-  } else if (type === 'TEXT') {
+  if (type === 'TEXT') {
     return new NativeTextElement(props)
   } else if (type === 'PIXEL') {
     return new NativePixelElement(props)
@@ -84,19 +80,19 @@ export const getHostContextNode = rootNode => {
   if (rootNode) RootNodeInstance = rootNode
   else {
     console.warn(`${rootNode} is not an valid root instance.`)
-    RootNodeInstance = new NativeScreen()
+    RootNodeInstance = new NativeContainer()
   }
   return RootNodeInstance
 }
 
-export const appendNativeElement = (screen, stateNode) => {
-  stateNode.parent = screen
-  screen.appendElement(stateNode)
+export const appendNativeElement = (container, stateNode) => {
+  stateNode.parent = container
+  container.appendElement(stateNode)
 }
 
-export const removeNativeElement = (screen, stateNode) => {
-  stateNode.parent = screen
-  screen.removeElement(stateNode)
+export const removeNativeElement = (container, stateNode) => {
+  stateNode.parent = container
+  container.removeElement(stateNode)
 }
 
 export const updateNativeElement = (element, newProps) => {

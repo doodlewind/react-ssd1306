@@ -1,5 +1,6 @@
-import Reconciler from 'react-reconciler/cjs/react-reconciler.development.js'
+import Reconciler from 'react-reconciler'
 import {
+  NativeContainer,
   createNativeInstance,
   appendNativeElement,
   updateNativeElement,
@@ -89,8 +90,8 @@ const hostConfig = {
 
 // Singleton
 const reconciler = Reconciler(hostConfig)
-const nativeContainer = createNativeInstance('SCREEN')
-const container = reconciler.createContainer(nativeContainer, false)
+const root = new NativeContainer()
+const container = reconciler.createContainer(root, false)
 
 export const Text = 'TEXT'
 export const Pixel = 'PIXEL'

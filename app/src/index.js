@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-fragments */ // rollup plugin workaround
 import './polyfill.js'
-import React from 'react/cjs/react.development.js'
+import React from 'react'
 import { SSD1306Renderer, Text, Pixel } from './renderer.js'
 
 const { Component, Fragment } = React
@@ -18,9 +18,6 @@ class App extends Component {
     return (
       <Fragment>
         <Text row={0} col={0}>
-          {hello}
-        </Text>
-        <Text row={1} col={1}>
           {hello}
         </Text>
         <Pixel x={p} y={p} />
