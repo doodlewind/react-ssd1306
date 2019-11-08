@@ -1,4 +1,4 @@
-import { init, clear, drawText, drawPixel } from 'renderer'
+import { init, clear, drawText, drawPixel } from './c-renderer'
 
 const FPS = 30
 const mainLoop = async (onTick, delay = 1000 / FPS) => {

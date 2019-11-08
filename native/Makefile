@@ -31,7 +31,7 @@ $(OBJDIR)/main.o: main.c
 	$(CC) $(LDFLAGS) $(CFLAGS_OPT) -c $(INCLUDES) -o $@ main.c
 
 main.c: main.js
-	qjsc -flto -e -M renderer,renderer -m -o $@ main.js
+	qjsc -flto -e -M ./c-renderer,renderer -m -o $@ main.js
 
 clean:
 	rm ./main

@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "dev-web": "parcel src/index.html",
     "dev": "rollup -c build/rollup.config.js --watch",
     "build": "rollup -c build/rollup.config.js"
   },
@@ -22,5 +23,8 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-pluginutils": "^2.8.2"
-  }
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ]
 }
