@@ -41,7 +41,7 @@ export class NativeContainer {
       const element = this.elements[i]
       if (element instanceof NativeTextElement) {
         const { children, row, col } = element.props
-        drawText(children[0], row, col)
+        drawText(children, row, col)
       } else if (element instanceof NativePixelElement) {
         drawPixel(element.props.x, element.props.y)
       }
