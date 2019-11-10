@@ -1,5 +1,5 @@
 # Render React to Embedded LCD
-We know that one of React’s biggest selling points, is the versatility of “Learn once, write anywhere”. But how can we render UI with React outside the web browser, or even outside Node.js? This article will take React straight-through the embedded driver layer, allowing modern front-end technology being seamlessly integrated with classic hardware.
+We know that one of React’s biggest selling points, is the versatility of "Learn once, write anywhere". But how can we render UI with React outside the web browser, or even outside Node.js? This article will take React straight-through the embedded driver layer, allowing modern front-end technology being seamlessly integrated with classic hardware.
 
 ## Background Overview
 This time our render target is a 0.96 inch dot matrix LCD screen, whose model is SSD1306. Its resolution is only 128x64, you may have used it to scroll through the lyrics in the early days when black and white MP3 was popular. How small is this chip? I took this photo as a physical comparison:
@@ -8,7 +8,7 @@ This time our render target is a 0.96 inch dot matrix LCD screen, whose model is
 
 This hardware is obviously not supported by modern PC, so we need an embedded development environment - I chose the convenient Raspberry Pi.
 
-Although Raspberry Pi already has well-established language environments, such as Python and Node.js, I hope to push the limits, trying to run React “with minimal hardware requirement”. In this way we need an ultra-lightweight JS interpreter for embedded hardware, so that we can replace the heavier V8 used by Chrome and Node.js. Finally I found [QuickJS](https://bellard.org/quickjs/), a young and embeddable JS engine.
+Although Raspberry Pi already has well-established language environments, such as Python and Node.js, I hope to push the limits, trying to run React "with minimal hardware requirement". In this way we need an ultra-lightweight JS interpreter for embedded hardware, so that we can replace the heavier V8 used by Chrome and Node.js. Finally I found [QuickJS](https://bellard.org/quickjs/), a young and embeddable JS engine.
 
 So, simply put, our goal is to get through these four systems: **React → QuickJS → Raspberry Pi → SSD1306 chip**. This initially difficult goal can be broken down into these following steps:
 
@@ -42,7 +42,7 @@ Then we can use the `qjs` command in the terminal, for opening the QuickJS inter
 
 > Note that when using ESM in QuickJS, you must add a `.js` suffix to the path. This is consistent with the requirements for direct usage of ESM in the browser.
 
-However, QuickJS does not directly support “that kind of React we write everyday”. After all, the famous JSX is just a dialect, not an industry standard. As a workaround, I introduced an auxiliary Node.js environment, packaging the code with Rollup, translating them into ESM format, and handing the output to QuickJS. The `node_modules` of this auxiliary environment is less than 10MB in size, the configuration details are omitted here.
+However, QuickJS does not directly support "that kind of React we write everyday". After all, the famous JSX is just a dialect, not an industry standard. As a workaround, I introduced an auxiliary Node.js environment, packaging the code with Rollup, translating them into ESM format, and handing the output to QuickJS. The `node_modules` of this auxiliary environment is less than 10MB in size, the configuration details are omitted here.
 
 So here comes the question, does `qjs react.js` really work? That’s where React's design shines. When React 16.0 was released two years ago, React has separated the upper layer's `react` and the lower layer's default DOM renderer `react-dom`. A standalone `react-reconciler` package is designed in the middle, implementing the Fiber scheduler. So the `react` package does not rely on the DOM, and can be run independently in a pure JS environment. Although such architecture increases the overall size, it is very useful for us to customize the render backend. How can we verify if React works? Try writing a simplest stateless component:
 
@@ -86,7 +86,7 @@ We have already run React smoothly on the QuickJS engine. But don't forget our g
 
 * The easiest way to control the SSD1306 chip is through the I2C protocol. This is just as using the USB protocol with USB devices.
 * There is no I2C ports on modern PC motherboard, but there are some compatible pins on the Raspberry Pi.
-* Once a device that supports I2C is connected, it can be controlled by the operating system. We know that everything is a “file” in Linux, so this screen will also be treated as a file, mounted in the `/dev` directory.
+* Once a device that supports I2C is connected, it can be controlled by the operating system. We know that everything is a "file" in Linux, so this screen will also be treated as a file, mounted in the `/dev` directory.
 * For files, simply use Unix system calls like `open` / `write` in C to control them. However, the I2C display is not a normal file after all, it’s controlled by the driver in the Linux kernel. So we need to install a package named [libi2c-dev](https://www.kernel.org/doc/Documentation/i2c/dev-interface), so as to use the `ioctl` system call in user land to control it.
 
 We first need to connect the chip to Raspberry Pi. Here's how (the Raspberry Pi pin number can be viewed with the `pinout` command):
@@ -284,7 +284,7 @@ const wait = timeout =>
 })()
 ```
 
-In fact, there are many Python modules on Raspberry Pi that have done this for you. So why do we have to reinvent the wheel in JS again? Because only JS has the “Learn once, write anywhere” React! Let's come to the last step, connect React to this chip!
+In fact, there are many Python modules on Raspberry Pi that have done this for you. So why do we have to reinvent the wheel in JS again? Because only JS has the "Learn once, write anywhere" React! Let's come to the last step, connect React to this chip!
 
 ## Implement React rendering backend
 Implementing a React renderer sounds like challenging. In fact, it’s probably not as complicated as what you imagine. The community has good tutorials like [Making a custom React renderer](https://github.com/nitin42/Making-a-custom-React-renderer), telling you how to implement your own renderer from zero to one. But in our case, this tutorial is not that complete. Two points are not covered:
@@ -310,7 +310,7 @@ Implementing the native state container and the main loop is actually trivial. T
 
 ![](https://ewind.us/images/react-ssd1306/react-arch-2.jpg)
 
-In this perspective, the JS Renderer we want to use in React, is more like a thinner “shell”. There are two important layers that we need to implement:
+In this perspective, the JS Renderer we want to use in React, is more like a thinner "shell". There are two important layers that we need to implement:
 
 * An adapter layer that implements the native state container and native rendering loop
 * A real renderer in C programming language
@@ -509,7 +509,7 @@ export const drawPixel = (x, y) => {
 }
 ```
 
-By using ParcelJS, all the JavaScript code we mentioned above, can be bundled and run directly inside your web browser, without any modification. That’s the real power of “Learn once, write anywhere”.
+By using ParcelJS, all the JavaScript code we mentioned above, can be bundled and run directly inside your web browser, without any modification. That’s the real power of "Learn once, write anywhere".
 
 ## Resources
 The entire project code example, is in the [react-ssd1306](https://github.com/doodlewind/react-ssd1306) repository. If you find it interesting, stars are welcomed. There’re also some helpful reference links:
