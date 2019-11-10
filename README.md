@@ -12,13 +12,13 @@ This project demonstrates how to:
 * Develop basic C module for QuickJS.
 * Build a custom "**native & dynamic**" renderer for React.
 
-Checkout my [Chinese blog post](https://ewind.us/2019/react-ssd1306) for details. 
+Checkout the [Tutorial](./docs/tutorial.md), or my [Chinese blog post](https://ewind.us/2019/react-ssd1306) for details. 
 
 ## Getting Started
 This project is originally designed to work on Raspberry Pi, but a web emulator is also available and works out of the box. Notice that no matter you run it on web or native, the whole React-related codebase is exactly the same.
 
 ### Web Approach
-You can try out the reconciler example, even if you don't have a Raspberry Pi. In this way only Node.js and ParcelJS are required:
+You can try out the reconciler example, even if you don't have a Raspberry Pi. In this way only Node.js and [ParcelJS](https://parceljs.org/) are required:
 
 ``` bash
 cd react-ssd1306/app
