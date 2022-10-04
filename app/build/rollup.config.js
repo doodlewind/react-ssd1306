@@ -1,17 +1,33 @@
-const jsx = require('./jsx-plugin.js')
-const commonjs = require('rollup-plugin-commonjs')
-const nodeResolve = require('rollup-plugin-node-resolve')
+const jsx = require("./jsx-plugin.js");
+const commonjs = require("rollup-plugin-commonjs");
+const nodeResolve = require("rollup-plugin-node-resolve");
+const typescript = require("rollup-plugin-typescript");
+const react = require('react');
 
 module.exports = {
-  input: 'src/index.js',
+  input: "src/index.tsx",
   output: {
-    file: 'dist/app.js',
-    format: 'esm'
+    file: "dist/app.js",
+    format: "esm",
   },
-  external: ['os', 'renderer'],
+  external: [
+    "renderer",
+    "timer",
+    "commodetto",
+    "commodetto/Poco",
+    "commodetto/outline",
+    "commodetto/parseBMF",
+    "Resource",
+  ],
   plugins: [
-    jsx(),
+    typescript(),
     nodeResolve(),
-    commonjs({ include: 'node_modules/**', sourceMap: false })
-  ]
-}
+    commonjs({
+      include: "node_modules/**",
+      namedExports: {
+        react: Object.keys(react)
+      },
+      sourceMap: false,
+    }),
+  ],
+};

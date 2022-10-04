@@ -1,0 +1,32 @@
+{
+	"include": [
+		"$(MODDABLE)/examples/manifest_base.json",
+		"$(MODDABLE)/examples/manifest_commodetto.json"
+	],
+	"modules": {
+		"*": [
+			"./main",
+			"./app"
+		]
+	},
+	"resources": {
+		"*-mask": "$(MODDABLE)/examples/assets/fonts/OpenSans-Semibold-18"
+	},
+	"creation": {
+		"chunk": {
+			"initial": 1048576,
+			"incremental": 1048576
+		},
+		"heap": {
+			"initial": 65536,
+			"incremental": 65536
+		},
+		"stack": 2048,
+		"keys": {
+			"available": 16386,
+			"name": 1993,
+			"symbol": 127
+		},
+		"main": "main"
+	}
+}

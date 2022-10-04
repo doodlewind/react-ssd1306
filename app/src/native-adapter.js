@@ -10,10 +10,10 @@ const mainLoop = async (onTick, delay = 1000 / FPS) => {
 }
 
 export class NativeContainer {
-  constructor () {
+  constructor (poco) {
     this.elements = []
     this.synced = true
-    init()
+    init(poco)
     clear()
     mainLoop(() => this.onFrameTick())
   }

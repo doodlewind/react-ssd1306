@@ -1,6 +1,14 @@
 /* global globalThis */
-import * as os from 'os'
+import Timer from 'timer'
 globalThis.process = { env: { NODE_ENV: 'development' } }
-if (!globalThis.setTimeout) globalThis.setTimeout = os.setTimeout
-globalThis.console.warn = console.log
-globalThis.console.error = () => {}
+
+if (!globalThis.setTimeout) globalThis.setTimeout = Timer.set
+
+const consoleLog = s => trace(`${s}\n`)
+if (!globalThis.console) {
+  globalThis.console = {
+    log: consoleLog,
+    warn: consoleLog,
+    error: consoleLog
+  }
+}

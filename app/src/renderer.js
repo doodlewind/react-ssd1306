@@ -9,14 +9,14 @@ import {
 } from './native-adapter.js'
 
 // Toggle to checkout reconciler call sequences
-const SHOW_RECONCILER_CALLS = false
+const SHOW_RECONCILER_CALLS = true
 const log = (...args) => SHOW_RECONCILER_CALLS && console.log(...args)
 
 const hostConfig = {
   // Methods for first-time rendering
   // --------------------------------
   appendInitialChild (parent, stateNode) {
-    log('appendInitialChild')
+    log(`appendInitialChild`)
   },
   appendChildToContainer (parent, stateNode) {
     log('appendChildToContainer')
@@ -88,16 +88,16 @@ const hostConfig = {
   supportsMutation: true
 }
 
-// Singleton
-const reconciler = Reconciler(hostConfig)
-const root = new NativeContainer()
-const container = reconciler.createContainer(root, false)
-
 export const Text = 'TEXT'
 export const Pixel = 'PIXEL'
 
 export const SSD1306Renderer = {
-  render (reactElement) {
+  render (reactElement, poco) {
+    // Singleton
+    const reconciler = Reconciler(hostConfig)
+    const root = new NativeContainer(poco)
+    const container = reconciler.createContainer(root, false)
+
     return reconciler.updateContainer(reactElement, container)
   }
 }

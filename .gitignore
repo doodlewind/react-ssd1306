@@ -3,3 +3,4 @@ app/dist/*.js
 .DS_Store
 dist
 .cache
+.parcel-cache
