@@ -6,7 +6,7 @@
 	"modules": {
 		"*": [
 			"./main",
-			"./app"
+			"./react-moddable"
 		]
 	},
 	"resources": {

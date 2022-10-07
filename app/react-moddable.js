@@ -1,0 +1,1 @@
+../lib/dist/react-moddable.js

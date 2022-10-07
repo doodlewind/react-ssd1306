@@ -1,84 +1,26 @@
-# React SSD1306
-A React Renderer for SSD1306 OLED chip on Raspberry Pi
+This project is my first attempt to run React.js on the top of ModdableSDK, implementing a custom renderer with `react-reconciler`.
 
-![](./docs/demo.jpg)
+## Prerequisites
 
-For those who doesn't have the device, a canvas-based web emulator is also included!
+* [Moddable](https://github.com/Moddable-OpenSource/moddable) (latest `public` branch)
 
-## Introduction
-This project demonstrates how to:
+## Installation
 
-* Use React together with [QuickJS](https://bellard.org/quickjs/) on Raspberry Pi.
-* Develop basic C module for QuickJS.
-* Build a custom "**native & dynamic**" renderer for React.
+This repository has two projects
 
-Checkout the [Tutorial](./docs/tutorial.md), or my [Chinese blog post](https://ewind.us/2019/react-ssd1306) for details. 
+- `lib`: A library project that bundles a custom renderer, `react`, `react-reconciler` into a single esm module using `rollup.js`
+- `app`: A Moddable application. It uses a bundled `react-moddable` library in `lib/dist`
 
-## Getting Started
-This project is originally designed to work on Raspberry Pi, but a web emulator is also available and works out of the box. Notice that no matter you run it on web or native, the whole React-related codebase is exactly the same.
-
-### Web Approach
-You can try out the reconciler example, even if you don't have a Raspberry Pi. In this way only Node.js and [ParcelJS](https://parceljs.org/) are required:
-
-``` bash
-cd react-ssd1306/app
-parcel src/index.html
+```
+npm install
+cd app && npm install
+cd ..
 ```
 
-Then just open `https://localhost:1234` to see the emulator.
+## Build
 
-### Native Approach
-Connect the chip, make sure you have QuickJS and Node.js installed on your Raspberry Pi, with I2C interface enabled. Few extra packages are also required:
+The project's default build target is `lin` that launches a simulator on Linux.
 
-``` bash
-sudo apt-get install i2c-tools libi2c-dev
 ```
-
-> Node.js is only required for JS module bundling and package management here.
-
-Init the project:
-
-``` bash
-cd react-ssd1306/app
-npm install && cd ..
-npm run build # build JS and C modules
-npm start # start the compiled binary
+npm run build
 ```
-
-## Usage
-Simply edit `./app/index.js` as main entrance:
-
-``` js
-import './polyfill.js'
-import React from 'react'
-import { SSD1306Renderer, Text, Pixel } from './renderer.js'
-
-class App extends React.Component {
-  constructor () {
-    super()
-    this.state = { hello: 'Hello React!', p: 0 }
-  }
-
-  render () {
-    const { hello, p } = this.state
-    return (
-      <React.Fragment>
-        <Text row={0} col={0}>{hello}</Text>
-        <Text row={1} col={0}>Hello QuickJS!</Text>
-        <Pixel x={p} y={p} />
-      </React.Fragment>
-    )
-  }
-
-  componentDidMount () {
-    // XXX: Emulate event driven update
-    setTimeout(() => this.setState({ hello: 'Hello Pi!', p: 42 }), 2000)
-    setTimeout(() => this.setState({ hello: '', p: -1 }), 4000)
-  }
-}
-
-SSD1306Renderer.render(<App />)
-```
-
-## License
-MIT

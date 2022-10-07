@@ -4,7 +4,7 @@
   "description": "A React Renderer for SSD1306 OLED chip on Raspberry Pi",
   "main": "src/renderer.js",
   "scripts": {
-    "build": "cd app && npm run build && cd ../native && make clean && make",
+    "build": "cd lib && npm run build && cd ../app && mcconfig -m -d -p lin",
     "start": "./native/main"
   },
   "keywords": [

@@ -1,16 +1,15 @@
 {
-  "name": "react-ssd1306-app",
+  "name": "react-moddable",
   "version": "0.0.0",
-  "description": "React SSD1306 Demo App",
+  "description": "React Moddable experiments",
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev-web": "parcel src/index.html",
     "dev": "rollup -c build/rollup.config.js --watch",
     "build": "rollup -c build/rollup.config.js"
   },
   "keywords": [],
-  "author": "Yifeng Wang",
+  "author": "Shinya Ishikawa",
   "license": "MIT",
   "dependencies": {
     "react": "^16.11.0",
